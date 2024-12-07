@@ -1,5 +1,5 @@
 $da = "{0:yyyyMMddHHmmss}" -f (Get-Date)
-$filename = "$env:appdata\hiik_$da"
+$filename = "$env:appdata\comback_$da"
 
 $rc = Get-ChildItem ([Environment]::GetFolderPath('Recent'))
 $ic = ipconfig /all
